@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/radialMenu.min.css">
+    <link rel="stylesheet" href="../css/dpad.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="parent">
+            <div class="div1"> <canvas ref="screenPreview" id="screenPreview"></canvas>
+                <canvas ref="screenPreview2Send" id="screenPreview2Send"></canvas> </div>
+
+            <div class="div2"> <select ref="portListBox" name="ports" id="portList">
+                    <option v-for="(port,index) in ports" :value="port.val">{{port.name}}</option>
+                </select>
+                <button class="iconButton" v-on:click="populatePortList" id="reloadButton"></button> </div>
+            <div class="div3"> <label for="backgroundColor" class="backgroundColorChoice" id="backgroundColorLabel">background color</label>
+                <input v-on:change="updateBackgroundColor" class="backgroundColorChoice" type="color" id="backgroundColor" :value="backgroundColor">
+                <label for="textColor">text color</label>
+                <input v-on:change="updateforegroundColor" type="color" id="textColor" :value="foregroundColor"></div>
+            <div class="div4"> <button class="iconButton" v-on:click="sendMessage" id="sendButton"></button>
+                <button class="iconButton" id="saveButton" v-on:click="saveData()"></button>
+                <button class="iconButton" id="loadButton" v-on:click="loadData()"></button></div>
+            <div class="div5">
+                <div id="elementList">
+                    <div class="element" v-for="(element,index) in elements">
+                        <div class="elementInfos">Type: {{element.type}} <input v-if="element.type=='text'"
+                                v-on:change="changingElement" type="text" :value="element.content" :data-index="index"
+                                data-type="content"></div>
+                        <dpad class="dpad" :x="element.x" :y="element.y" :index="index"></dpad>
+                        <input type="range" id="textSize" name="textSize" min="1" max="100" :value="element.size"
+                            v-on:click="changingElement" :data-index="index" data-type="size">
+                            <button class="iconButton" id="deleteButton" v-on:click="deleteElement(index)"></button>
+                    </div>
+                </div>
+                <div class="radial menu radius3 speed5 clock" id="radialParent">
+                    <input id="radialMenu" type="checkbox">
+                    <label class="radialPivot" for="radialMenu">
+                        +
+                        <span class="sronly">Show menu items</span>
+                    </label>
+                    <ul class="radialList compass" role="navigation" aria-label="menu items">
+                        <li class="clock10"><a class="iconButton" v-on:click="addElement('text')" id="textButton"></a>
+                        </li>
+                        <li class="clock12"><a class="iconButton" v-on:click="addElement('circle')"
+                                id="circleButton"></a></li>
+                        <li class="clock2"><a class="iconButton" v-on:click="addElement('square')"
+                                id="squareButton"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <canvas id="screenPreview"></canvas>
+    <canvas id="screenPreview2Send"></canvas>
+
+    
+        <div id="portArea">
+            <select name="ports" id="portList">
+                <option v-for="(port,index) in ports" :value="port.val">{{port.name}}</option>
+            </select>
+            <button class="iconButton" v-on:click="populatePortList" id="reloadButton"><img class="buttonIcon"
+                    src="../assets/icons/sync.png" alt=""></button>
+
+        </div>
+        <div id="colorArea">
+            <label for="backgroundColor" id="backgroundColorLabel">background color</label>
+            <input v-on:change="updateBackgroundColor" type="color" id="backgroundColor" :value="backgroundColor">
+            <label for="textColor">text color</label>
+            <input v-on:change="updateforegroundColor" type="color" id="textColor" :value="foregroundColor">
+        </div>
+        <div id="messageArea">
+            <button class="iconButton" v-on:click="sendMessage" id="SendButton"><img class="buttonIcon"
+                    src="../assets/icons/upload.png" alt=""></button>
+            <button class="iconButton" v-on:click="saveData()"><img class="buttonIcon" src="../assets/icons/save.png"
+                    alt=""></button>
+            <button class="iconButton" v-on:click="loadData()"><img class="buttonIcon" src="../assets/icons/load.png"
+                    alt=""></button>
+
+        </div>
+        <div id="elementArea">
+            <ul>
+                <li class="element" v-for="(element,index) in elements">
+                    <div class="elementInfos">Type: {{element.type}} <input v-if="element.type=='text'"
+                            v-on:change="changingElement" type="text" :value="element.content" :data-index="index"
+                            data-type="content"></div>
+                    <dpad class="dpad" :x="element.x" :y="element.y" :index="index"></dpad>
+                    <input type="range" id="textSize" name="textSize" min="1" max="100" :value="element.size"
+                        v-on:click="changingElement" :data-index="index" data-type="size">
+                    
+
+                    <button class="iconButton" v-on:click="deleteElement(index)"><img class="buttonIcon"
+                            src="../assets/icons/delete.png" alt=""></button>
+                </li>
+            </ul>
+            <div class="radial menu radius2 speed5 clock">
+                <input id="radialMenu" type="checkbox">
+                <label class="radialPivot" for="radialMenu">
+                    +
+                    <span class="sronly">Show menu items</span>
+                </label>
+                <ul class="radialList compass" role="navigation" aria-label="menu items">
+                    <li class="clock3"><a v-on:click="addElement('text')"><img class="buttonIcon"
+                        src="../assets/icons/text.png" alt=""></a></li>
+                        <li class="clock6"><a v-on:click="addElement('circle')">circle</a></li>
+                    <li class="clock9"><a v-on:click="addElement('square')"><img class="buttonIcon"
+                        src="../assets/icons/shapes.png" alt=""></a></li>
+                </ul>
+            </div>
+
+        
+
+
+        </div>
+    </div>
+-->
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+      </script>
+
+    <script src="../js/constants.js"></script>
+    <script type=module src="../js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+/*@font-face { font-family: pixel; src: url('../assets/Code\ 7x5.ttf'); } 
+html{
+	--screenMultiplicator:2;
+}
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: 32px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
+#backgroundColor,#backgroundColorLabel{
+	display: none;
+}
+.buttonIcon{
+	
+	aspect-ratio: 1;
+	width: 1.5rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+.iconButton{
+	margin:0.5rem;
+	position: relative;
+	aspect-ratio: 1;
+	width: 1.5rem;
+	background-color: grey;
+	border: none;
+}
+#screenPreview2Send{
+	display: none;
+}
+#screenOverview{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#portArea{
+	position: absolute;
+	left: 0;
+	top: calc(140px*var(--screenMultiplicator));
+}
+#colorArea{
+	position: absolute;
+	left: 0;
+	top: calc(160px*var(--screenMultiplicator));
+}
+#messageArea{
+	position: absolute;
+	left: 0;
+	top: calc(180px*var(--screenMultiplicator));
+}
+#elementArea{
+	position: absolute;
+	left: calc(250px*var(--screenMultiplicator));
+	top: 0;
+	height: 100%;
+	background-color: red;
+	overflow-y: scroll;
+}
+ul{
+	list-style: none;
+}
+#app{
+	overflow-x: hidden;
+}
+.element{
+	width: 100%;
+	border: 1px solid black;
+}
+
+
+.element{
+	position: relative;
+	height: 5rem;
+	width: 20rem;
+}
+
+.dpad{
+	position: absolute;
+	top: 1rem;
+	left: 15rem;
+}
+
+.radial{
+	position: absolute;
+	bottom: 0;
+	left: 3rem;
+	background-color: grey;
+	border-radius: 50%;
+}*/
+
+*{
+	vertical-align: middle;
+
+}
+#screenPreview2Send,
+.backgroundColorChoice {
+display: none;
+}
+#app{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden;
+}
+.parent {
+	display: grid;
+	--screenMultiplicator:2;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: calc(135px*var(--screenMultiplicator)) repeat(3,1fr) 2fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	background-color: darkslateblue;
+	height: 100%;
+}
+
+.div1 {
+	grid-area: 1 / 1 / 2 / 2;
+}
+
+.div2 {
+	grid-area: 2 / 1 / 3 / 2;
+}
+
+.div3 {
+	grid-area: 3 / 1 / 4 / 2;
+}
+
+.div4 {
+	grid-area: 4 / 1 / 5 / 2;
+}
+
+.div5 {
+
+	grid-area: 1 / 2 / 6 / 2;
+	background-color: darkslategray;
+	position: relative;
+	height: 100%;
+}
+#elementList{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	border: 1px solid slategray;
+	gap: 0.5rem;
+	height: 90%;
+}
+.element{
+min-height: 5rem;
+outline: solid black 1px;
+}
+#radialParent{
+	background-color: blue;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	
+}
+
+#screenPreview {
+	border: 1px black solid;
+}
+
+#reloadButton {
+	background-image: url("../assets/icons/sync.png");
+	background-size: contain;
+}
+
+#sendButton {
+	background-image: url("../assets/icons/upload.png");
+	background-size: contain;
+}
+
+#saveButton {
+	background-image: url("../assets/icons/save.png");
+	background-size: contain;
+}
+
+#loadButton {
+	background-image: url("../assets/icons/load.png");
+	background-size: contain;
+}
+
+#deleteButton {
+	background-image: url("../assets/icons/delete.png");
+	background-size: contain;
+}
+#textButton{
+	background-image: url("../assets/icons/text.png");
+	background-size: contain;
+}
+#squareButton{
+	background-image: url("../assets/icons/square.png");
+	background-size: contain;
+}
+#circleButton{
+	background-image: url("../assets/icons/circle.png");
+	background-size: contain;
+}
+
+.iconButton {
+	aspect-ratio: 1;
+	width: 1.5rem;
+	height: 1.5rem;
+}
+.dpad{
+	position: absolute;
+	left:15rem
+}

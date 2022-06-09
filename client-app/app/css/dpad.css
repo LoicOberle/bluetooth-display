@@ -1,0 +1,25 @@
+
+.dpad-wrapper{
+	position: relative;
+}
+.up,.left,.right,.down{
+	position: absolute;
+	aspect-ratio: 1;
+	width: 1rem;
+}
+.up{
+top:0;
+left: 1rem;
+}
+.down{
+	top:2rem;
+	left: 1rem;
+}
+.left{
+	top:1rem;
+	left: 0;
+}
+.right{
+	top:1rem;
+	left: 2rem;
+}
